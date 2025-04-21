@@ -1,82 +1,4 @@
-/**
- * Interface for cocktail data
- */
-export interface Cocktail {
-  strDrink: string
-  strCategory: string
-  strGlass: string
-  strAlcoholic: string
-  strInstructions: string
-  [key: string]: string | null
-}
-
-/**
- * Interface for API response
- */
-export interface CocktailApiResponse {
-  drinks: Cocktail[] | null
-}
-
-/**
- * Fetch cocktails by name from the CocktailDB API
- * @param name The name of the cocktail to search for
- * @returns Promise with the API response
- */
-export async function fetchCocktailsByName(name: string): Promise<CocktailApiResponse> {
-  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${encodeURIComponent(name)}`
-
-  const response = await fetch(url)
-
-  if (!response.ok) {
-    throw new Error(`CocktailDB API error: ${response.statusText}`)
-  }
-
-  return await response.json()
-}
-
-/**
- * Interface for review data
- */
-export interface Review {
-  id: string
-  username: string
-  rating: number
-  date: string
-  content: string
-  helpful: number
-  images?: string[]
-  verified: boolean
-  country?: string
-}
-
-/**
- * Interface for review summary data
- */
-export interface ReviewSummary {
-  totalReviews: number
-  averageRating: number
-  ratingDistribution: {
-    '5': number
-    '4': number
-    '3': number
-    '2': number
-    '1': number
-  }
-  verifiedReviews: number
-}
-
-/**
- * Interface for API response
- */
-export interface ReviewResponse {
-  productInfo: {
-    id: string
-    title: string
-    store: string
-  }
-  summary: ReviewSummary
-  reviews: Review[]
-}
+import { Review, ReviewResponse } from '../types/index.js'
 
 /**
  * Fetch reviews for an AliExpress product
@@ -101,7 +23,7 @@ export async function fetchReviews(url: string, minRating?: number, limit: numbe
 function extractProductId(url: string): string | null {
   try {
     const productUrl = new URL(url)
-    // Example: extract from path or search params - this would need to match AliExpress URL format
+    // Example: extract from path or search params - would need to match AliExpress URL format
     const idMatch = productUrl.pathname.match(/\/item\/(\d+)\.html/)
     if (idMatch && idMatch[1]) {
       return idMatch[1]

@@ -1,4 +1,4 @@
-import { Review, ReviewResponse } from '../services/reviews-service.js'
+import { Review, ReviewResponse } from '../types/index.js'
 
 /**
  * Format a single review into a readable string format

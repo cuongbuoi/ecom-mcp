@@ -1,19 +1,121 @@
-# AliExpress Reviews API Server
+# AliExpress Reviews MCP Server
 
-MCP Server cung cấp công cụ truy xuất và phân tích đánh giá sản phẩm từ AliExpress.
+This Model Context Protocol (MCP) server allows AI assistants to fetch user reviews from AliExpress products.
 
-## Cài đặt
+## Features
+
+- Fetch reviews from AliExpress products
+- Filter reviews by minimum rating
+- Limit the number of reviews returned
+- Summary of review statistics
+
+## Installation
 
 ```bash
-yarn install
-yarn build
+# Clone the repository
+git clone <repository-url>
+cd ecom-mcp
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
 ```
 
-## Khởi chạy
+## Usage
+
+### Run the server
 
 ```bash
-yarn start
+npm start
 ```
+
+### Test with MCP tools
+
+You can test the server using FastMCP's CLI tools:
+
+```bash
+# Test with FastMCP dev tool
+npm run dev
+
+# Test with FastMCP inspector
+npm run inspect
+```
+
+### Examples
+
+The project includes several example implementations:
+
+```bash
+# Run basic example
+npm run example:basic
+
+# Run advanced example with more features
+npm run example:advanced
+
+# Run example with stdio transport (default)
+npm run example:sse
+```
+
+### Tool Documentation
+
+The server provides the following tool:
+
+#### get_reviews
+
+Fetches reviews for an AliExpress product.
+
+**Parameters:**
+
+- `url` (string, required): URL of the AliExpress product
+- `minRating` (number, optional): Filter reviews by minimum rating (1-5)
+- `limit` (number, optional): Maximum number of reviews to return (default: 20, max: 100)
+
+**Example:**
+
+```json
+{
+  "url": "https://www.aliexpress.com/item/1234567890.html",
+  "minRating": 4,
+  "limit": 10
+}
+```
+
+## Development
+
+### Commands
+
+- `npm run build`: Build the TypeScript project
+- `npm run start`: Start the MCP server
+- `npm run dev`: Run the server with FastMCP dev tool
+- `npm run inspect`: Run the server with FastMCP inspector
+- `npm run lint`: Run linting checks
+- `npm run lint:fix`: Fix linting issues
+- `npm run format`: Format code with Prettier
+- `npm run format:check`: Check formatting without making changes
+
+## Project Structure
+
+The project uses a streamlined structure with FastMCP:
+
+```
+src/
+├── services/             # Service layer
+│   └── reviews-service.ts  # Service for fetching product reviews
+├── utils/                # Utility functions
+│   └── format-utils.ts     # Formatting utilities for reviews
+└── index.ts              # Main entry point with FastMCP configuration
+
+examples/                 # Example implementations
+├── basic-server.ts       # Basic FastMCP example
+├── advanced-server.ts    # Advanced example with more features
+└── sse-server.ts         # Example configured for SSE transport
+```
+
+## License
+
+ISC
 
 ## Cấu trúc dự án
 
@@ -34,30 +136,6 @@ src/
 └── index.ts          # Điểm khởi đầu ứng dụng
 ```
 
-## Công cụ MCP
-
-Server hiện cung cấp công cụ sau:
-
-### get_reviews
-
-Truy xuất đánh giá sản phẩm từ AliExpress.
-
-**Tham số:**
-
-- `url` (string, bắt buộc): URL của sản phẩm AliExpress
-- `minRating` (number, tùy chọn): Lọc đánh giá từ mức này trở lên (1-5)
-- `limit` (number, tùy chọn): Số lượng đánh giá tối đa (mặc định: 20)
-
-**Ví dụ:**
-
-```json
-{
-  "url": "https://www.aliexpress.com/item/1005005647140045.html",
-  "minRating": 4,
-  "limit": 50
-}
-```
-
 ## Phát triển
 
 ### Chất lượng mã nguồn
@@ -66,13 +144,13 @@ Dự án sử dụng ESLint và Prettier để đảm bảo chất lượng mã 
 
 ```bash
 # Định dạng mã nguồn với Prettier
-yarn format
+npm run format
 
 # Kiểm tra vấn đề với ESLint
-yarn lint
+npm run lint
 
 # Tự động sửa các lỗi ESLint có thể khắc phục
-yarn lint:fix
+npm run lint:fix
 ```
 
 ### Thêm công cụ mới
@@ -85,5 +163,5 @@ yarn lint:fix
 ### Biên dịch
 
 ```bash
-yarn build
+npm run build
 ```

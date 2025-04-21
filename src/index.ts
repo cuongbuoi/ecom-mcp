@@ -1,26 +1,15 @@
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
-import { configureServer } from './config/server-config.js'
-import { registerReviewTools } from './tools/review-tools.js'
+import { createServer } from './config/server-config.js'
+import { registerTools } from './tools/index.js'
 
-// Create the server
-const server = configureServer()
+// Create server instance
+const server = createServer()
 
-// Register tools
-registerReviewTools(server)
+// Register all tools
+registerTools(server)
 
-// Connect the transport
-async function main(): Promise<void> {
-  try {
-    const transport = new StdioServerTransport()
-    await server.connect(transport)
-    console.error('AliExpress Review Server running on stdio')
-  } catch (error) {
-    console.error('Error starting server:', error)
-    process.exit(1)
-  }
-}
-
-main().catch((err) => {
-  console.error('Fatal error:', err)
-  process.exit(1)
+// Start the server with stdio transport
+server.start({
+  transportType: 'stdio'
 })
+
+console.error('AliExpress Review Server running on stdio')

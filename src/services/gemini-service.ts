@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai'
-import { Page } from 'puppeteer'
+import { Page } from 'puppeteer-core'
 import dotenv from 'dotenv'
 
 // Nạp các biến môi trường từ file .env

@@ -1,5 +1,5 @@
 import { Review, ReviewResponse } from '../types/index.js'
-import puppeteer, { Browser, Page } from 'puppeteer'
+import puppeteer, { Browser, Page } from 'puppeteer-core'
 import { analyzeDOMForReviewElements } from './gemini-service.js'
 
 /**
@@ -30,7 +30,7 @@ export async function fetchReviews(url: string, minRating?: number, limit: numbe
 async function launchBrowser(): Promise<Browser> {
   return await puppeteer.launch({
     headless: 'shell',
-    executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    executablePath: '/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome',
     args: [
       '--disable-setuid-sandbox',
       '--no-sandbox',
@@ -537,7 +537,7 @@ async function clickNextPageButton(page: Page, paginationSelector: string): Prom
     // Check if it exists and is not disabled
     if (nextButton && !nextButton.classList.contains('disabled') && !nextButton.hasAttribute('disabled')) {
       // Click the next button
-      ;(nextButton as HTMLElement).click()
+      ; (nextButton as HTMLElement).click()
       return true
     }
 

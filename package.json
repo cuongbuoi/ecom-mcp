@@ -1,16 +1,13 @@
 {
   "name": "ecom-mcp",
   "version": "1.0.0",
-  "description": "FastMCP server for collecting AliExpress product reviews",
+  "description": "KudosiMCP is a specialized server designed to analyze content from Jira and associated resources such as Confluence and GitLab",
   "type": "module",
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
     "start": "node build/index.js",
     "dev": "npx fastmcp dev build/index.js",
     "inspect": "npx fastmcp inspect build/index.js",
-    "example:basic": "npx tsx examples/basic-server.ts",
-    "example:advanced": "npx tsx examples/advanced-server.ts",
-    "example:sse": "npx tsx examples/sse-server.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -25,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.5.0",
     "fastmcp": "^1.22.2"
   },
   "devDependencies": {

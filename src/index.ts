@@ -12,4 +12,4 @@ server.start({
   transportType: 'stdio'
 })
 
-console.error('AliExpress Review Server running on stdio')
+console.error('Kudosi MCP Server running on stdio')

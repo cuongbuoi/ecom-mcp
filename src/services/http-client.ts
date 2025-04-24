@@ -8,12 +8,12 @@ export const httpClient = axios.create({
   baseURL: process.env.KUDOSI_API_URL,
   headers: {
     'Content-Type': 'application/json',
+    Accept: '*/*',
     Authorization: `Bearer ${process.env.KUDOSI_TOKEN}`
   }
 })
 
 httpClient.interceptors.request.use((config) => {
-  config.headers['Authorization'] = `Bearer ${process.env.KUDOSI_TOKEN}`
   return config
 })
 

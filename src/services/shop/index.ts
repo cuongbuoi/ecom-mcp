@@ -2,6 +2,11 @@ import { AxiosRequestConfig } from 'axios'
 import { httpClient } from '../http-client.ts'
 import { ErrorResponse } from '../../types/index.ts'
 
+interface ShopInfoRequest {
+  platform: string
+  is_marketplace: boolean
+}
+
 interface ShopInfoResponse {
   errors?: ErrorResponse[]
   shop_id: number
@@ -19,7 +24,7 @@ interface ShopInfoResponse {
   app_plan_name: string
 }
 
-export const getShopInfo = async (): Promise<ShopInfoResponse> => {
-  const response = await httpClient.get<AxiosRequestConfig, ShopInfoResponse>('/extension/v2/shop')
+export const getShopInfo = async (params: ShopInfoRequest): Promise<ShopInfoResponse> => {
+  const response = await httpClient.get<AxiosRequestConfig, ShopInfoResponse>('/extension/v2/shop', { params })
   return response
 }

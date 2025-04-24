@@ -3,7 +3,9 @@ import { getProducts } from '../services/products/index.ts'
 import { Tool, UserError, TextContent } from 'fastmcp'
 
 const getProductsToolSchema = z.object({
-  search: z.string().optional()
+  search: z.string().optional(),
+  page_size: z.number().optional().default(20),
+  page_token: z.string().optional().default('')
 })
 
 export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
@@ -17,8 +19,8 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
         total: 100
       })
       const data = await getProducts({
-        page_size: 100,
-        page_token: '',
+        page_size: params.page_size,
+        page_token: params.page_token,
         search: params.search
       })
       log.info('cc', {
@@ -26,6 +28,7 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
       })
 
       const productList = data.products || []
+      const nextPageToken = data.pagination?.next_page_token || ''
 
       let resultText = `Retrieved ${productList.length} products${params.search ? ` matching "${params.search}"` : ''}.\n\n`
 
@@ -41,6 +44,11 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
 
       if (productList.length === 0) {
         resultText += 'No products found.'
+      }
+
+      // Add pagination information
+      if (nextPageToken) {
+        resultText += `\n\nMore products available. Use page_token: "${nextPageToken}" to view the next page.`
       }
 
       const result: TextContent = {

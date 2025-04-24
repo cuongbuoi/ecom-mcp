@@ -32,6 +32,7 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
       // Add information about each product
       productList.forEach((product, index) => {
         resultText += `Product ${index + 1}: ${product.title} (ID: ${product.product_id})\n`
+        resultText += `Link: ${product.product_url}\n`
         resultText += `Price: ${product.price} - Status: ${product.status ? 'Active' : 'Inactive'}\n`
         resultText += `Reviews: ${product.total_reviews} - Average Rating: ${product.average_rating}\n`
         if (index < productList.length - 1) {

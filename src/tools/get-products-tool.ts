@@ -9,7 +9,7 @@ const getProductsToolSchema = z.object({
 })
 
 export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
-  name: 'get_products',
+  name: 'kds_get_products',
   description: 'Get all products of store',
   parameters: getProductsToolSchema,
   execute: async (params, { log, reportProgress }) => {

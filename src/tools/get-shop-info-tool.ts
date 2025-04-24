@@ -5,7 +5,7 @@ import { Tool, UserError, TextContent } from 'fastmcp'
 const getShopInfoToolSchema = z.object({})
 
 export const getShopInfoTool: Tool<undefined, typeof getShopInfoToolSchema> = {
-  name: 'get_shop_info',
+  name: 'kds_get_shop_info',
   description: 'Get shop info',
   parameters: getShopInfoToolSchema,
   execute: async (params, { log, reportProgress }) => {

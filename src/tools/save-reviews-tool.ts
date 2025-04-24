@@ -9,7 +9,7 @@ const saveReviewsToolHandler = async (params: z.infer<typeof saveReviewsToolSche
 }
 
 export const saveReviewsTool = {
-  name: 'save_reviews',
+  name: 'kds_save_reviews',
   description: 'Save reviews to the database',
   parameters: saveReviewsToolSchema,
   execute: saveReviewsToolHandler

@@ -24,5 +24,3 @@ registerTools(server)
 server.start({
   transportType: 'stdio'
 })
-
-console.error('Kudosi MCP Server running on stdio')

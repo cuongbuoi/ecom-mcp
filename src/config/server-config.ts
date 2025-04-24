@@ -12,7 +12,7 @@ export interface ServerConfig {
  * Default server configuration
  */
 export const defaultConfig: ServerConfig = {
-  name: 'ecom-mcp',
+  name: 'kudosi-mcp',
   version: '1.0.0'
 }
 

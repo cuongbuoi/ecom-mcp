@@ -12,7 +12,7 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
   name: 'kds_get_products',
   description: 'Get all products of store',
   parameters: getProductsToolSchema,
-  execute: async (params, { log, reportProgress }) => {
+  execute: async (params, { reportProgress }) => {
     try {
       reportProgress({
         progress: 0,
@@ -22,9 +22,6 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
         page_size: params.page_size,
         page_token: params.page_token,
         search: params.search
-      })
-      log.info('cc', {
-        data: JSON.stringify(data)
       })
 
       const productList = data.products || []

@@ -2,24 +2,23 @@ import { z } from 'zod'
 import { getShopInfo } from '../services/shop/index.ts'
 import { Tool, UserError, TextContent } from 'fastmcp'
 
-const getShopInfoToolSchema = z.object({})
+const getShopInfoToolSchema = z.object({
+  platform: z.enum(['aliexpress', 'amazon', 'temu', 'ebay', 'etsy']).default('aliexpress')
+})
 
 export const getShopInfoTool: Tool<undefined, typeof getShopInfoToolSchema> = {
   name: 'kds_get_shop_info',
   description: 'Get shop info',
   parameters: getShopInfoToolSchema,
-  execute: async (params, { log, reportProgress }) => {
+  execute: async (params, { reportProgress }) => {
     try {
       reportProgress({
         progress: 0,
         total: 100
       })
       const data = await getShopInfo({
-        platform: 'aliexpress',
+        platform: params.platform,
         is_marketplace: true
-      })
-      log.info('shop_info', {
-        data: JSON.stringify(data)
       })
 
       // Create natural language summary

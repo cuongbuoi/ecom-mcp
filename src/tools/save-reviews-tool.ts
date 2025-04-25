@@ -4,8 +4,8 @@ import { createImportJob, saveReviews } from '../services/import/index.ts'
 
 const saveReviewsToolSchema = z.object({
   product_id: z.number(),
-  link: z.string(),
-  external_product_id: z.string(),
+  link: z.string().describe('The product link from the platform'),
+  external_product_id: z.string().describe('The product ID from the platform'),
   reviews: z.array(
     z.object({
       review_id: z.string(),
@@ -60,7 +60,7 @@ export const saveReviewsTool: Tool<undefined, typeof saveReviewsToolSchema> = {
         throw new UserError('Something went wrong: Reviews not saved')
       }
 
-      let resultText = `Reviews saved successfully: ${data.count_processed_reviews} processed, ${data.count_duplicated_reviews} duplicated, ${data.count_filtered_reviews} filtered`
+      let resultText = `Reviews saved for Job Import ID ${job_import_id} successfully: ${data.count_processed_reviews} processed, ${data.count_duplicated_reviews} duplicated, ${data.count_filtered_reviews} filtered`
 
       if (data.count_duplicated_reviews) {
         resultText += `\n\nDuplicated reviews: ${data.count_duplicated_reviews}`

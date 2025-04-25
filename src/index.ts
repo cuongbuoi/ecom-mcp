@@ -1,6 +1,5 @@
-import { log } from 'console'
 import { createServer } from './config/server-config.ts'
-import dotenv, { config } from 'dotenv'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
@@ -18,21 +17,21 @@ if (!process.env.KUDOSI_API_URL) {
 async function start(): Promise<void> {
   try {
     // Grab the transport type from the command line
-    const transportType = process.argv[2] ?? 'stdio';
+    const transportType = process.argv[2] ?? 'stdio'
 
     // Create server instance
     const server = createServer()
 
     if (transportType === 'stdio') {
-      server.start({ transportType });
+      server.start({ transportType })
     } else if (transportType === 'sse') {
       server.start({
         transportType,
         sse: {
           endpoint: '/sse',
           port: 3030
-        },
-      });
+        }
+      })
     }
   } catch (error) {
     console.error(`Failed to start server: ${error instanceof Error ? error.message : String(error)}`)

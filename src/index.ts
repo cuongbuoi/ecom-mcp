@@ -34,8 +34,6 @@ async function start(): Promise<void> {
         },
       });
     }
-
-    console.log(`Kudosi MCP started with transport type: ${transportType}`);
   } catch (error) {
     console.error(`Failed to start server: ${error instanceof Error ? error.message : String(error)}`)
     process.exit(1)

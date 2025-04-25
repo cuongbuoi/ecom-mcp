@@ -1,5 +1,4 @@
 import { createServer } from './config/server-config.ts'
-import { registerTools } from './tools/index.ts'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -14,13 +13,27 @@ if (!process.env.KUDOSI_API_URL) {
   process.exit(1)
 }
 
-// Create server instance
-const server = createServer()
+// Create and start the server
+async function start(): Promise<void> {
+  try {
+    // Create server instance
+    const server = createServer()
 
-// Register all tools
-registerTools(server)
+    // Start the server with stdio transport
+    server.start({
+      transportType: 'stdio'
+    })
+  } catch (error) {
+    console.error(`Failed to start server: ${error instanceof Error ? error.message : String(error)}`)
+    process.exit(1)
+  }
+}
 
-// Start the server with stdio transport
-server.start({
-  transportType: 'stdio'
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+  console.error('Shutting down...')
+  process.exit(0)
 })
+
+// Start the server
+start()

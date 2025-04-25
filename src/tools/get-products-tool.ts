@@ -10,7 +10,8 @@ const getProductsToolSchema = z.object({
 
 export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
   name: 'kds_get_products',
-  description: 'Get all products of store',
+  description:
+    'Retrieve a list of products from your store with optional search filtering and pagination. This tool returns product details including titles, IDs, URLs, prices, status, review counts, and average ratings. Use this to browse your product catalog or find specific products by search term.',
   parameters: getProductsToolSchema,
   execute: async (params, { reportProgress }) => {
     try {

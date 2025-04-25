@@ -1,4 +1,5 @@
 import { FastMCP } from 'fastmcp'
+import { registerTools } from '../tools/index.ts'
 
 /**
  * Configuration options for the server
@@ -24,8 +25,18 @@ export const defaultConfig: ServerConfig = {
 export function createServer(config: Partial<ServerConfig> = {}): FastMCP {
   const finalConfig = { ...defaultConfig, ...config }
 
-  return new FastMCP({
+  const server = new FastMCP({
     name: finalConfig.name,
     version: finalConfig.version as `${number}.${number}.${number}`
   })
+
+  // Register all tools
+  registerTools(server)
+
+  // Add general error handling
+  process.on('uncaughtException', (error) => {
+    console.error(`Uncaught exception: ${error instanceof Error ? error.stack : String(error)}`)
+  })
+
+  return server
 }

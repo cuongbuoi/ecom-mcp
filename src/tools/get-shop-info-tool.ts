@@ -8,7 +8,8 @@ const getShopInfoToolSchema = z.object({
 
 export const getShopInfoTool: Tool<undefined, typeof getShopInfoToolSchema> = {
   name: 'kds_get_shop_info',
-  description: 'Get shop info',
+  description:
+    'Retrieve detailed information about your e-commerce shop from various platforms (Aliexpress, Amazon, Temu, Ebay, Etsy). This tool returns shop details including name, ID, status, URL, app plan, and version. Use this to check your shop configuration and status across different marketplaces.',
   parameters: getShopInfoToolSchema,
   execute: async (params, { reportProgress }) => {
     try {

@@ -1,26 +1,29 @@
 import { TextContent, Tool, UserError } from 'fastmcp'
 import { z } from 'zod'
-import { createImportJob, saveReviews, Review } from '../services/import/index.ts'
+import { createImportJob, saveReviews } from '../services/import/index.ts'
 
 const saveReviewsToolSchema = z.object({
   product_id: z.number(),
   link: z.string(),
   external_product_id: z.string(),
-  reviews: z.string()
+  reviews: z.array(
+    z.object({
+      review_id: z.string(),
+      author: z.string(),
+      star: z.number(),
+      country: z.string(),
+      content: z.string(),
+      platform: z.string(),
+      status: z.boolean(),
+      created_at: z.string()
+    })
+  )
 })
-
-const parseReviews = (reviews: string): Review[] => {
-  try {
-    // TODO: Using Gemini to parse the reviews
-    return JSON.parse(reviews)
-  } catch (error) {
-    throw new UserError('Invalid reviews format')
-  }
-}
 
 export const saveReviewsTool: Tool<undefined, typeof saveReviewsToolSchema> = {
   name: 'kds_save_reviews',
-  description: 'Save reviews to the database',
+  description:
+    'Save product reviews to the database. This tool imports reviews for a specific product, processes them, and returns statistics about successfully processed, duplicated, and filtered reviews. Use this to import customer reviews from supported platforms.',
   parameters: saveReviewsToolSchema,
   execute: async (params, { reportProgress }) => {
     try {
@@ -33,22 +36,26 @@ export const saveReviewsTool: Tool<undefined, typeof saveReviewsToolSchema> = {
         link: params.link,
         external_product_id: params.external_product_id
       })
-
+      reportProgress({
+        progress: 30,
+        total: 100
+      })
       if (!job_import_id) {
         throw new UserError('Error: Job import ID is not found')
       }
 
-      const reviews = parseReviews(params.reviews)
-
       const data = await saveReviews({
         platform: 'aliexpress',
         product_id: params.product_id,
-        reviews,
+        reviews: params.reviews,
         job_import_id,
         link: params.link,
         external_product_id: params.external_product_id
       })
-
+      reportProgress({
+        progress: 70,
+        total: 100
+      })
       if (!data.count_processed_reviews && !data.count_duplicated_reviews && !data.count_filtered_reviews) {
         throw new UserError('Something went wrong: Reviews not saved')
       }

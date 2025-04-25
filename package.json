@@ -4,9 +4,9 @@
   "description": "KudosiMCP is an MCP server to interact with Kudosi app",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "dev": "npx fastmcp dev src/index.ts",
-    "inspect": "npx fastmcp inspect src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "dev:stdio": "npm run dev stdio",
+    "dev:sse": "npm run dev sse",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",

@@ -35,8 +35,7 @@ export interface SaveReviewsResponse {
 }
 
 export const saveReviews = async (data: SaveReviewsRequest): Promise<SaveReviewsResponse> => {
-  const response = await httpClient.post<AxiosRequestConfig, SaveReviewsResponse>('/extension/save-reviews', data)
-  return response
+  return await httpClient.post<AxiosRequestConfig, SaveReviewsResponse>('/extension/save-reviews', data)
 }
 
 interface CreateImportJobRequest {
@@ -52,6 +51,5 @@ interface CreateImportJobResponse {
 }
 
 export const createImportJob = async (data: CreateImportJobRequest): Promise<CreateImportJobResponse> => {
-  const response = await httpClient.post<AxiosRequestConfig, CreateImportJobResponse>('/extension/create-import', data)
-  return response
+  return await httpClient.post<AxiosRequestConfig, CreateImportJobResponse>('/extension/create-import', data)
 }

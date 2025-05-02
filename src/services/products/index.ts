@@ -52,6 +52,5 @@ interface ProductResponse {
 }
 
 export const getProducts = async (params: ProductRequest): Promise<ProductResponse> => {
-  const response = await httpClient.get<AxiosRequestConfig, ProductResponse>('/product/list', { params })
-  return response
+  return await httpClient.get<AxiosRequestConfig, ProductResponse>('/product/list', { params })
 }

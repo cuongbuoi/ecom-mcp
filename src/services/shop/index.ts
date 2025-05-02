@@ -25,6 +25,5 @@ interface ShopInfoResponse {
 }
 
 export const getShopInfo = async (params: ShopInfoRequest): Promise<ShopInfoResponse> => {
-  const response = await httpClient.get<AxiosRequestConfig, ShopInfoResponse>('/extension/v2/shop', { params })
-  return response
+  return await httpClient.get<AxiosRequestConfig, ShopInfoResponse>('/extension/v2/shop', { params })
 }

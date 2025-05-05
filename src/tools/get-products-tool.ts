@@ -13,22 +13,21 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
   description:
     'Retrieve a list of products from your store with optional search filtering and pagination. This tool returns product details including titles, IDs, URLs, prices, status, review counts, and average ratings. Use this to browse your product catalog or find specific products by search term.',
   parameters: getProductsToolSchema,
-  execute: async (params, { reportProgress }) => {
+  annotations: {
+    title: 'Get Products',
+  },
+  execute: async (args) => {
     try {
-      reportProgress({
-        progress: 0,
-        total: 100
-      })
       const data = await getProducts({
-        page_size: params.page_size,
-        page_token: params.page_token,
-        search: params.search
+        page_size: args.page_size,
+        page_token: args.page_token,
+        search: args.search
       })
 
       const productList = data.products || []
       const nextPageToken = data.pagination?.next_page_token || ''
 
-      let resultText = `Retrieved ${productList.length} products${params.search ? ` matching "${params.search}"` : ''}.\n\n`
+      let resultText = `Retrieved ${productList.length} products${args.search ? ` matching "${args.search}"` : ''}.\n\n`
 
       // Add information about each product
       productList.forEach((product, index) => {
@@ -58,11 +57,6 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
       return result
     } catch (error) {
       throw new UserError('Error: ' + error)
-    } finally {
-      reportProgress({
-        progress: 100,
-        total: 100
-      })
     }
   }
 }

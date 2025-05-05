@@ -25,36 +25,28 @@ export const saveReviewsTool: Tool<undefined, typeof saveReviewsToolSchema> = {
   description:
     'Save product reviews to the database. This tool imports reviews for a specific product, processes them, and returns statistics about successfully processed, duplicated, and filtered reviews. Use this to import customer reviews from supported platforms.',
   parameters: saveReviewsToolSchema,
-  execute: async (params, { reportProgress }) => {
+  annotations: {
+    title: 'Save Reviews',
+  },
+  execute: async (args) => {
     try {
-      reportProgress({
-        progress: 0,
-        total: 100
-      })
       const { job_import_id } = await createImportJob({
-        product_id: params.product_id,
-        link: params.link,
-        external_product_id: params.external_product_id
+        product_id: args.product_id,
+        link: args.link,
+        external_product_id: args.external_product_id
       })
-      reportProgress({
-        progress: 30,
-        total: 100
-      })
+
       if (!job_import_id) {
         throw new UserError('Error: Job import ID is not found')
       }
 
       const data = await saveReviews({
         platform: 'aliexpress',
-        product_id: params.product_id,
-        reviews: params.reviews,
+        product_id: args.product_id,
+        reviews: args.reviews,
         job_import_id,
-        link: params.link,
-        external_product_id: params.external_product_id
-      })
-      reportProgress({
-        progress: 70,
-        total: 100
+        link: args.link,
+        external_product_id: args.external_product_id
       })
       if (!data.count_processed_reviews && !data.count_duplicated_reviews && !data.count_filtered_reviews) {
         throw new UserError('Something went wrong: Reviews not saved')
@@ -76,11 +68,6 @@ export const saveReviewsTool: Tool<undefined, typeof saveReviewsToolSchema> = {
       return result
     } catch (error) {
       throw new UserError('Error: ' + error)
-    } finally {
-      reportProgress({
-        progress: 100,
-        total: 100
-      })
     }
   }
 }

@@ -1,6 +1,18 @@
-# E-commerce Model Context Protocol (MCP)
+# Kudosi Model Context Protocol (MCP)
 
 This project provides a Model Context Protocol (MCP) service that enables AI models to interact with Shopify e-commerce platform. It offers specialized tools to retrieve shop information, access product data, and save reviews from external sources.
+
+## Overview
+
+Kudosi MCP serves as a bridge between AI assistants and the Kudosi app for Shopify. The Kudosi app helps Shopify merchants manage product reviews, analyze customer feedback, and improve their store's performance. This MCP enables AI assistants to:
+
+- Access shop data from Shopify stores using the Kudosi app
+- Retrieve and search through product listings
+- Import and manage product reviews from external sources
+- Help merchants analyze and respond to customer feedback
+- Provide insights based on review data to improve product offerings
+
+By integrating with this MCP, AI assistants can offer Shopify merchants powerful tools for managing their e-commerce business through natural language conversations.
 
 ## Features
 
@@ -22,7 +34,7 @@ This project provides a Model Context Protocol (MCP) service that enables AI mod
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/yourusername/ecom-mcp.git
+   git clone https://github.com/cuongbuoi/ecom-mcp.git
    cd ecom-mcp
    ```
 
@@ -42,20 +54,6 @@ This project provides a Model Context Protocol (MCP) service that enables AI mod
 ### Running Your MCP Server
 
 There are multiple ways to run your MCP server depending on your needs:
-
-#### Using npm scripts
-
-Start the server with stdio transport (default):
-
-```bash
-npm run dev
-```
-
-Start the server with SSE transport:
-
-```bash
-npm run dev:sse
-```
 
 #### Test with CLI
 

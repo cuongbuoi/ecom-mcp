@@ -12,7 +12,7 @@ export const getShopInfoTool: Tool<undefined, typeof getShopInfoToolSchema> = {
     'Retrieve detailed information about your e-commerce shop from various platforms (Aliexpress, Amazon, Temu, Ebay, Etsy). This tool returns shop details including name, ID, status, URL, app plan, and version. Use this to check your shop configuration and status across different marketplaces.',
   parameters: getShopInfoToolSchema,
   annotations: {
-    title: 'Get Shop Info',
+    title: 'Get Shop Info'
   },
   execute: async (args) => {
     try {

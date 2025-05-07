@@ -4,6 +4,7 @@
   "description": "KudosiMCP is an MCP server to interact with Kudosi app",
   "type": "module",
   "scripts": {
+    "cli": "npx fastmcp dev src/index.ts",
     "dev": "tsx watch src/index.ts",
     "dev:stdio": "npm run dev stdio",
     "dev:sse": "npm run dev sse",

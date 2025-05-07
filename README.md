@@ -1,0 +1,158 @@
+# E-commerce Model Context Protocol (MCP)
+
+This project provides a Model Context Protocol (MCP) service that enables AI models to interact with Shopify e-commerce platform. It offers specialized tools to retrieve shop information, access product data, and save reviews from external sources.
+
+## Features
+
+- **Shop Information Retrieval**: Get detailed information about Shopify stores including name, ID, status, URL, plan, and version
+- **Product Management**: Retrieve and search product listings from Shopify stores
+- **Review Management**: Import and save product reviews from external sources to Shopify
+
+## Installation
+
+### Prerequisites
+
+- Node.js (LTS version recommended)
+- npm or yarn
+- Cursor IDE (for development)
+- Claude desktop (for AI assistance)
+
+### Setup Steps
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/yourusername/ecom-mcp.git
+   cd ecom-mcp
+   ```
+
+2. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the project root with the following variables:
+   ```
+   KUDOSI_TOKEN=your_token_here
+   ```
+
+## Usage
+
+### Running Your MCP Server
+
+There are multiple ways to run your MCP server depending on your needs:
+
+#### Using npm scripts
+
+Start the server with stdio transport (default):
+
+```bash
+npm run dev
+```
+
+Start the server with SSE transport:
+
+```bash
+npm run dev:sse
+```
+
+#### Test with CLI
+
+The easiest way to test and debug your server in the terminal:
+
+```bash
+npm run cli
+```
+
+This runs your server with [`mcp-cli`](https://github.com/wong2/mcp-cli), allowing you to test your tools and debug issues interactively in the terminal.
+
+### Using with Claude Desktop
+
+To use this MCP server with Claude Desktop:
+
+1. Follow the guide at https://modelcontextprotocol.io/quickstart/user
+2. Add your MCP server configuration in Claude Desktop settings
+3. Connect Claude to your local MCP server to access shop information, products, and review management tools
+
+### Using with Cursor IDE
+
+1. Open the project in Cursor IDE
+2. Configure the MCP in Cursor's settings by adding to your `.cursorrules` file:
+
+```json
+{
+  "mcps": {
+    "kudosi-mcp": {
+      "command": "npx",
+      "args": ["tsx", "/path/to/your/project/src/index.ts"],
+      "env": {
+        "KUDOSI_API_URL": "https://your-api-url",
+        "KUDOSI_TOKEN": "your-token-here"
+      }
+    }
+  }
+}
+```
+
+Replace `/path/to/your/project` with your actual project path, and update the environment variables with your credentials.
+
+Example:
+
+```json
+{
+  "mcps": {
+    "kudosi-mcp": {
+      "command": "npx",
+      "args": ["tsx", "/Users/yourusername/Documents/AI/MCP/ecom-mcp/src/index.ts"],
+      "env": {
+        "KUDOSI_API_URL": "https://priv.go.alireviews.dev",
+        "KUDOSI_TOKEN": "your-token-here"
+      }
+    }
+  }
+}
+```
+
+3. Restart Cursor IDE to apply the configuration
+4. Your MCP tools will now be available to Claude and other AI assistants in Cursor
+
+### Available Scripts
+
+- `npm run cli` - Test and debug your MCP server in the terminal
+- `npm run dev` - Start the server in development mode (stdio transport)
+- `npm run dev:sse` - Start with SSE transport
+- `npm run lint` - Run ESLint for code quality checks
+- `npm run format` - Format code with Prettier
+
+## API Tools
+
+### Shop Information
+
+Retrieve detailed Shopify shop information including name, ID, status, and URL.
+
+### Product Management
+
+Get, search, and filter products from connected Shopify stores.
+
+### Review Management
+
+Import and save product reviews from external sources to your Shopify store.
+
+## Project Structure
+
+```
+ecom-mcp/
+├── src/
+│   ├── config/       # Server and application configuration
+│   ├── services/     # Service implementations
+│   ├── tools/        # Tool implementations for MCP
+│   ├── types/        # TypeScript type definitions
+│   └── index.ts      # Application entry point
+├── .env              # Environment variables (create this file)
+└── package.json      # Project dependencies and scripts
+```
+
+## License
+
+ISC

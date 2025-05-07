@@ -1,6 +1,6 @@
 import { TextContent, Tool, UserError } from 'fastmcp'
 import { z } from 'zod'
-import { createImportJob, saveReviews } from '../services/import/index.ts'
+import { createImportJob, saveReviews } from '../services/import/index.js'
 import { createHash } from 'crypto'
 
 const saveReviewsToolSchema = z.object({

@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
-import { ErrorResponse } from '../../types/index.ts'
-import { httpClient } from '../http-client.ts'
+import { ErrorResponse } from '../../types/index.js'
+import { httpClient } from '../http-client.js'
 
 export interface Review {
   review_id: string

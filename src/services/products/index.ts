@@ -1,5 +1,5 @@
-import { ErrorResponse, Pagination } from '../../types/index.ts'
-import { httpClient } from '../http-client.ts'
+import { ErrorResponse, Pagination } from '../../types/index.js'
+import { httpClient } from '../http-client.js'
 import { AxiosRequestConfig } from 'axios'
 
 interface ProductRequest {

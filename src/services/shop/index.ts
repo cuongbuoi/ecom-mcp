@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
-import { httpClient } from '../http-client.ts'
-import { ErrorResponse } from '../../types/index.ts'
+import { httpClient } from '../http-client.js'
+import { ErrorResponse } from '../../types/index.js'
 
 interface ShopInfoRequest {
   platform: string

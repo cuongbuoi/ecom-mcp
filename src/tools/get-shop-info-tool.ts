@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getShopInfo } from '../services/shop/index.ts'
+import { getShopInfo } from '../services/shop/index.js'
 import { Tool, UserError, TextContent } from 'fastmcp'
 
 const getShopInfoToolSchema = z.object({

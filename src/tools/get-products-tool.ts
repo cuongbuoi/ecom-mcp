@@ -11,7 +11,7 @@ const getProductsToolSchema = z.object({
 export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
   name: 'kds_get_products',
   description:
-    'Retrieve a list of products from your store with optional search filtering and pagination. This tool returns product details including titles, IDs, URLs, prices, status, review counts, and average ratings. Use this to browse your product catalog or find specific products by search term.',
+    'Retrieve a list of products from your store with optional search filtering and pagination. This tool returns product details including titles, IDs, images, URLs, prices, status, review counts, and average ratings. Use this to browse your product catalog or find specific products by search term.',
   parameters: getProductsToolSchema,
   annotations: {
     title: 'Get Products',
@@ -32,6 +32,7 @@ export const getProductsTool: Tool<undefined, typeof getProductsToolSchema> = {
       // Add information about each product
       productList.forEach((product, index) => {
         resultText += `Product ${index + 1}: ${product.title} (ID: ${product.product_id})\n`
+        resultText += `Image: ${product.image}\n`
         resultText += `Link: ${product.product_url}\n`
         resultText += `Price: ${product.price} - Status: ${product.status ? 'Active' : 'Inactive'}\n`
         resultText += `Reviews: ${product.total_reviews} - Average Rating: ${product.average_rating}\n`

@@ -11,17 +11,12 @@
     "noEmit": false,
     "allowImportingTsExtensions": false,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "fix-imports.js",
-    "package.json",
-    "package-lock.json",
-    "tsconfig.json",
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build", "fix-imports.js", "package.json", "package-lock.json", "tsconfig.json"]
 }

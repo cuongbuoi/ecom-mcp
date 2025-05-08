@@ -144,4 +144,8 @@ ecom-mcp/
 
 ## License
 
-ISC
+MIT License
+
+## Support
+
+For issues or feature requests, please open an issue on the GitHub repository.

@@ -1,24 +1,24 @@
 # Kudosi Model Context Protocol (MCP)
 
-This project provides a Model Context Protocol (MCP) service that enables AI models to interact with Shopify e-commerce platform. It offers specialized tools to retrieve shop information, access product data, and save reviews from external sources.
+This project provides a Model Context Protocol (MCP) service that enables AI models to seamlessly interact with the Shopify e-commerce platform. It offers specialized tools to retrieve shop information, access product data, and manage reviews from external sources.
 
 ## Overview
 
-Kudosi MCP serves as a bridge between AI assistants and the Kudosi app for Shopify. The Kudosi app helps Shopify merchants manage product reviews, analyze customer feedback, and improve their store's performance. This MCP enables AI assistants to:
+Kudosi MCP serves as a powerful bridge between AI assistants and the Kudosi app for Shopify. The Kudosi app helps Shopify merchants effectively manage product reviews, analyze customer feedback, and improve their store's performance. This MCP enables AI assistants to:
 
-- Access shop data from Shopify stores using the Kudosi app
-- Retrieve and search through product listings
-- Import and manage product reviews from external sources
-- Help merchants analyze and respond to customer feedback
-- Provide insights based on review data to improve product offerings
+- Access comprehensive shop data from Shopify stores using the Kudosi app
+- Retrieve and efficiently search through product listings
+- Import and manage product reviews from various external sources
+- Help merchants analyze and strategically respond to customer feedback
+- Provide data-driven insights based on review analysis to improve product offerings
 
-By integrating with this MCP, AI assistants can offer Shopify merchants powerful tools for managing their e-commerce business through natural language conversations.
+By integrating with this MCP, AI assistants can offer Shopify merchants powerful tools for managing their e-commerce business through intuitive natural language conversations.
 
 ## Features
 
-- **Shop Information Retrieval**: Get detailed information about Shopify stores including name, ID, status, URL, plan, and version
-- **Product Management**: Retrieve and search product listings from Shopify stores
-- **Review Management**: Import and save product reviews from external sources to Shopify
+- **Shop Information Retrieval**: Access detailed information about Shopify stores including name, ID, status, URL, plan, and version
+- **Product Management**: Efficiently retrieve and search product listings from Shopify stores
+- **Review Management**: Seamlessly import and save product reviews from external sources to Shopify
 
 ## Installation
 
@@ -53,7 +53,7 @@ By integrating with this MCP, AI assistants can offer Shopify merchants powerful
 
 ### Running Your MCP Server
 
-There are multiple ways to run your MCP server depending on your needs:
+There are multiple ways to run your MCP server depending on your specific needs:
 
 #### Test with CLI
 
@@ -65,46 +65,36 @@ npm run cli
 
 This runs your server with [`mcp-cli`](https://github.com/wong2/mcp-cli), allowing you to test your tools and debug issues interactively in the terminal.
 
+#### Setup before use
+
+```bash
+npm run build
+```
+
+```bash
+npm i -g .
+```
+
 ### Using with Claude Desktop
 
 To use this MCP server with Claude Desktop:
 
-1. Follow the guide at https://modelcontextprotocol.io/quickstart/user
+1. Follow the comprehensive guide at https://modelcontextprotocol.io/quickstart/user
 2. Add your MCP server configuration in Claude Desktop settings
 3. Connect Claude to your local MCP server to access shop information, products, and review management tools
 
 ### Using with Cursor IDE
 
 1. Open the project in Cursor IDE
-2. Configure the MCP in Cursor's settings by adding to your `.cursorrules` file:
+2. Configure the MCP in Cursor's settings by adding to your `.cursor/mcp.json` file:
 
 ```json
 {
-  "mcps": {
+  "mcpServers": {
     "kudosi-mcp": {
-      "command": "npx",
-      "args": ["tsx", "/path/to/your/project/src/index.ts"],
+      "command": "kds-save-review-mcp",
       "env": {
         "KUDOSI_API_URL": "https://your-api-url",
-        "KUDOSI_TOKEN": "your-token-here"
-      }
-    }
-  }
-}
-```
-
-Replace `/path/to/your/project` with your actual project path, and update the environment variables with your credentials.
-
-Example:
-
-```json
-{
-  "mcps": {
-    "kudosi-mcp": {
-      "command": "npx",
-      "args": ["tsx", "/Users/yourusername/Documents/AI/MCP/ecom-mcp/src/index.ts"],
-      "env": {
-        "KUDOSI_API_URL": "https://priv.go.alireviews.dev",
         "KUDOSI_TOKEN": "your-token-here"
       }
     }
@@ -117,6 +107,7 @@ Example:
 
 ### Available Scripts
 
+- `npm run build` - Build the project for use with MCP clients
 - `npm run cli` - Test and debug your MCP server in the terminal
 - `npm run dev` - Start the server in development mode (stdio transport)
 - `npm run dev:sse` - Start with SSE transport
@@ -127,15 +118,15 @@ Example:
 
 ### Shop Information
 
-Retrieve detailed Shopify shop information including name, ID, status, and URL.
+Retrieve comprehensive Shopify shop information including name, ID, status, and URL.
 
 ### Product Management
 
-Get, search, and filter products from connected Shopify stores.
+Get, search, and filter products from connected Shopify stores with powerful querying capabilities.
 
 ### Review Management
 
-Import and save product reviews from external sources to your Shopify store.
+Efficiently import and save product reviews from external sources to your Shopify store for centralized management.
 
 ## Project Structure
 
